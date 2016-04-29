@@ -2,6 +2,8 @@ package com.epicodus.myrestaurants;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.epicodus.myrestaurants.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,12 +29,4 @@ public class MainActivityInstrumentationTest {
                 .check(matches(withText("Portland")));
     }
 
-    @Test
-    public void locationIsSentToRestaurantsActivity() {
-        String location = "Portland";
-        onView(withId(R.id.locationEditText)).perform(typeText(location));
-        onView(withId(R.id.findRestaurantsButton)).perform(click());
-        onView(withId(R.id.locationTextView)).check(matches
-                (withText("Here are all the restaurants near: " + location)));
-    }
 }

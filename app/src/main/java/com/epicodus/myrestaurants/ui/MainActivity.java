@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants;
+package com.epicodus.myrestaurants.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.epicodus.myrestaurants.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
+
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.locationEditText) EditText mLocationEditText;
     @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String location = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, RestaurantActivity.class);
+                Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }
