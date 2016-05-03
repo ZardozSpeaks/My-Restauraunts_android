@@ -1,37 +1,36 @@
 package com.epicodus.myrestaurants.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.epicodus.myrestaurants.R;
-import com.epicodus.myrestaurants.adapter.RestaurantListAdapter;
+import com.epicodus.myrestaurants.adapters.RestaurantListAdapter;
 import com.epicodus.myrestaurants.models.Restaurant;
 import com.epicodus.myrestaurants.services.YelpService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Response;
+import okhttp3.Callback;
 
-public class RestaurantsActivity extends AppCompatActivity {
-    public static final String TAG = RestaurantsActivity.class.getSimpleName();
+public class RestaurantsListActivity extends AppCompatActivity {
     @Bind(R.id.restaurantsRecyclerView) RecyclerView mRecyclerView;
     private RestaurantListAdapter mAdapter;
-
     public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+    public static final String TAG = RestaurantsListActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
+        setContentView(R.layout.activity_restaurants_list);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
@@ -53,13 +52,13 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 mRestaurants = yelpService.processResults(response);
 
-                RestaurantsActivity.this.runOnUiThread(new Runnable() {
+                RestaurantsListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(RestaurantsActivity.this);
+                                new LinearLayoutManager(RestaurantsListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }
