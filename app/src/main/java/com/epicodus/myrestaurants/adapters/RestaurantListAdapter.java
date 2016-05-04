@@ -1,3 +1,4 @@
+
 package com.epicodus.myrestaurants.adapters;
 
 import android.content.Context;
@@ -51,20 +52,17 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     }
 
     public class RestaurantViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.restaurantImageView)
-        ImageView mRestaurantImageView;
-        @Bind(R.id.restaurantNameTextView)
-        TextView mNameTextView;
+        @Bind(R.id.restaurantImageView) ImageView mRestaurantImageView;
+        @Bind(R.id.restaurantNameTextView) TextView mNameTextView;
         @Bind(R.id.categoryTextView) TextView mCategoryTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
         private Context mContext;
 
-
         public RestaurantViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            mContext = itemView.getContext();
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
                     int itemPosition = getLayoutPosition();
@@ -77,6 +75,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         }
 
         public void bindRestaurant(Restaurant restaurant) {
+            Picasso.with(mContext).load(restaurant.getImageUrl()).into(mRestaurantImageView);
+
             Picasso.with(mContext)
                     .load(restaurant.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)

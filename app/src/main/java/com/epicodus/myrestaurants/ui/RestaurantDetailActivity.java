@@ -1,3 +1,4 @@
+
 package com.epicodus.myrestaurants.ui;
 
 import android.os.Bundle;
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-
 public class RestaurantDetailActivity extends AppCompatActivity {
-    @Bind(R.id.viewPager) ViewPager mViewPager;
+    @Bind(R.id.viewPager)
+    ViewPager mViewPager;
     private RestaurantPagerAdapter adapterViewPager;
     ArrayList<Restaurant> mRestaurants = new ArrayList<>();
 
