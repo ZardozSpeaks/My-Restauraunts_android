@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants;
+package com.davidremington.myrestaurants;
 
 public class Constants {
     public static final String YELP_CONSUMER_KEY = BuildConfig.YELP_CONSUMER_KEY;

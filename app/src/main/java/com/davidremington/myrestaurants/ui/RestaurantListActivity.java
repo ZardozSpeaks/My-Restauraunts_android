@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants.ui;
+package com.davidremington.myrestaurants.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.epicodus.myrestaurants.R;
-import com.epicodus.myrestaurants.adapters.RestaurantListAdapter;
-import com.epicodus.myrestaurants.models.Restaurant;
-import com.epicodus.myrestaurants.services.YelpService;
+import com.davidremington.myrestaurants.R;
+import com.davidremington.myrestaurants.adapters.RestaurantListAdapter;
+import com.davidremington.myrestaurants.models.Restaurant;
+import com.davidremington.myrestaurants.services.YelpService;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants.models;
+package com.davidremington.myrestaurants.models;
 
 import org.parceler.Parcel;
 

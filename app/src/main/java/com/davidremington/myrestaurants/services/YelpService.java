@@ -1,8 +1,8 @@
-package com.epicodus.myrestaurants.services;
+package com.davidremington.myrestaurants.services;
 
 
-import com.epicodus.myrestaurants.Constants;
-import com.epicodus.myrestaurants.models.Restaurant;
+import com.davidremington.myrestaurants.Constants;
+import com.davidremington.myrestaurants.models.Restaurant;
 
 import org.json.JSONArray;
 import org.json.JSONException;

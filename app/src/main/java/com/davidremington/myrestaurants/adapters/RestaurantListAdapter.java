@@ -1,5 +1,5 @@
 
-package com.epicodus.myrestaurants.adapters;
+package com.davidremington.myrestaurants.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.epicodus.myrestaurants.R;
-import com.epicodus.myrestaurants.models.Restaurant;
-import com.epicodus.myrestaurants.ui.RestaurantDetailActivity;
+import com.davidremington.myrestaurants.R;
+import com.davidremington.myrestaurants.models.Restaurant;
+import com.davidremington.myrestaurants.ui.RestaurantDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;

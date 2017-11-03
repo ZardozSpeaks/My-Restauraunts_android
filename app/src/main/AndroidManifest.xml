@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.epicodus.myrestaurants">
+    package="com.davidremington.myrestaurants">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyRestaurantsApplication"
+        android:name="com.davidremington.myrestaurants.MyRestaurantsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.davidremington.myrestaurants.ui.MainActivity"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,14 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RestaurantListActivity">
+        <activity android:name="com.davidremington.myrestaurants.ui.RestaurantListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value="com.davidremington.myrestaurants.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.RestaurantDetailActivity" />
+        <activity android:name="com.davidremington.myrestaurants.ui.RestaurantDetailActivity" />
         <activity android:name=".ui.SavedRestaurantListActivity.java" />
-        <activity android:name=".ui.SavedRestaurantListActivity"></activity>
+        <activity android:name="com.davidremington.myrestaurants.ui.SavedRestaurantListActivity"></activity>
     </application>
 
 </manifest>

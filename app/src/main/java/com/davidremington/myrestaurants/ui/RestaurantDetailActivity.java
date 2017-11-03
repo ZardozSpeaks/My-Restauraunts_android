@@ -1,13 +1,13 @@
 
-package com.epicodus.myrestaurants.ui;
+package com.davidremington.myrestaurants.ui;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.epicodus.myrestaurants.R;
-import com.epicodus.myrestaurants.adapters.RestaurantPagerAdapter;
-import com.epicodus.myrestaurants.models.Restaurant;
+import com.davidremington.myrestaurants.R;
+import com.davidremington.myrestaurants.adapters.RestaurantPagerAdapter;
+import com.davidremington.myrestaurants.models.Restaurant;
 
 import org.parceler.Parcels;
 

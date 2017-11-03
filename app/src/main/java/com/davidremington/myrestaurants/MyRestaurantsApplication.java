@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants;
+package com.davidremington.myrestaurants;
 
 
 import android.app.Application;

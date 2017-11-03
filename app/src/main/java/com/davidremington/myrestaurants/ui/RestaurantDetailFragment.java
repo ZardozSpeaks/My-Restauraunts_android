@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants.ui;
+package com.davidremington.myrestaurants.ui;
 
 
 import android.content.Intent;
@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.epicodus.myrestaurants.Constants;
-import com.epicodus.myrestaurants.R;
-import com.epicodus.myrestaurants.models.Restaurant;
+import com.davidremington.myrestaurants.Constants;
+import com.davidremington.myrestaurants.R;
+import com.davidremington.myrestaurants.models.Restaurant;
 import com.firebase.client.Firebase;
 import com.squareup.picasso.Picasso;
 

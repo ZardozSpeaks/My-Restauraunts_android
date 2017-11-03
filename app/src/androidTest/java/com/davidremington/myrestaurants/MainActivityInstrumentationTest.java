@@ -1,8 +1,8 @@
-package com.epicodus.myrestaurants;
+package com.davidremington.myrestaurants;
 
 import android.support.test.rule.ActivityTestRule;
 
-import com.epicodus.myrestaurants.ui.MainActivity;
+import com.davidremington.myrestaurants.ui.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
