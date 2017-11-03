@@ -5,7 +5,10 @@ import org.parceler.Parcel;
 import java.util.ArrayList;
 import java.util.List;
 
+//Parceler requires package private access
+
 @Parcel
+@SuppressWarnings("WeakerAccess")
 public class Restaurant {
     String name;
     String phone;
@@ -17,7 +20,9 @@ public class Restaurant {
     double longitude;
     List<String> categories = new ArrayList<>();
 
-    public Restaurant() {}
+    public Restaurant() {
+        //convenience constructor for Parceler
+    }
 
     public Restaurant(String name, String phone, String website,
                       double rating, String imageUrl, ArrayList<String> address,
@@ -54,8 +59,7 @@ public class Restaurant {
     }
 
     public String getLargeImageUrl(String imageUrl) {
-        String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 6).concat("o.jpg");
-        return largeImageUrl;
+        return imageUrl.substring(0, imageUrl.length() - 6).concat("o.jpg");
     }
 
     public List<String> getAddress() {
