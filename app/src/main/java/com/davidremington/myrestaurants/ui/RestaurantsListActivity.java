@@ -23,7 +23,7 @@ import timber.log.Timber;
 
 import static com.davidremington.myrestaurants.Constants.LOCATION;
 
-public class RestaurantListActivity extends BaseActivity {
+public class RestaurantsListActivity extends BaseActivity {
     private RestaurantListAdapter adapter;
     public ArrayList<Restaurant> restaurants = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class RestaurantListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_list);
+        setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
         Intent intent = getIntent();
         String location = intent.getStringExtra(LOCATION);
@@ -50,11 +50,11 @@ public class RestaurantListActivity extends BaseActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 restaurants = YelpService.processResults(response);
 
-                RestaurantListActivity.this.runOnUiThread(() -> {
+                RestaurantsListActivity.this.runOnUiThread(() -> {
                     adapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
                     recyclerView.setAdapter(adapter);
                     RecyclerView.LayoutManager layoutManager =
-                            new LinearLayoutManager(RestaurantListActivity.this);
+                            new LinearLayoutManager(RestaurantsListActivity.this);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(true);
                 });

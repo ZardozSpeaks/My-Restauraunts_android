@@ -17,7 +17,8 @@ import android.widget.Toast;
 import com.davidremington.myrestaurants.Constants;
 import com.davidremington.myrestaurants.R;
 import com.davidremington.myrestaurants.models.Restaurant;
-import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -113,8 +114,10 @@ public class RestaurantDetailFragment extends Fragment {
 
     @OnClick(R.id.saveRestaurantButton)
     public void saveRestaurantToFavorites() {
-        Firebase ref = new Firebase(Constants.FIREBASE_URL_RESTAURANTS);
-        ref.push().setValue(restaurant);
+        DatabaseReference restaurantRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        restaurantRef.push().setValue(restaurant);
         Toast.makeText(getContext(), R.string.saved, Toast.LENGTH_SHORT).show();
     }
 }

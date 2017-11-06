@@ -1,46 +1,57 @@
 package com.davidremington.myrestaurants.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.davidremington.myrestaurants.Constants;
 import com.davidremington.myrestaurants.R;
+import com.davidremington.myrestaurants.adapters.FirebaseRestaurantViewHolder;
 import com.davidremington.myrestaurants.models.Restaurant;
-import com.firebase.client.Firebase;
-import com.firebase.client.Query;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedRestaurantListActivity extends AppCompatActivity {
-    private Query mQuery;
-    private Firebase mFirebaseRestaurantRef;
-    private FirebaseRestaurantListAdapter mAdapter;
+public class SavedRestaurantListActivity extends BaseActivity {
+    private DatabaseReference restaurantReference;
+    private FirebaseRecyclerAdapter firebaseAdapter;
 
-    @Bind(R.id.restaurantsRecyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.restaurantsRecyclerView) RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_list);
+
+        setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
-        mFirebaseRestaurantRef = new Firebase(Constants.FIREBASE_URL_RESTAURANTS);
-
-        setUpFirebaseQuery();
-        setUpRecyclerView();
+        restaurantReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        setUpFirebaseAdapter();
     }
 
-    private void setUpFirebaseQuery() {
-        String location = mFirebaseRestaurantRef.toString();
-        mQuery = new Firebase(location);
+    private void setUpFirebaseAdapter() {
+        firebaseAdapter = new FirebaseRecyclerAdapter<Restaurant, FirebaseRestaurantViewHolder>
+                (Restaurant.class, R.layout.restaurant_list_item, FirebaseRestaurantViewHolder.class,
+                        restaurantReference) {
+
+            @Override
+            protected void populateViewHolder(FirebaseRestaurantViewHolder viewHolder,
+                                              Restaurant model, int position) {
+                viewHolder.bindRestaurant(model);
+            }
+        };
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(firebaseAdapter);
     }
 
-    private void setUpRecyclerView() {
-        mAdapter = new FirebaseRestaurantListAdapter(mQuery, Restaurant.class);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        firebaseAdapter.cleanup();
     }
 }

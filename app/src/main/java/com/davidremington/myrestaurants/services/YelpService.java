@@ -1,7 +1,6 @@
 package com.davidremington.myrestaurants.services;
 
 
-import com.davidremington.myrestaurants.Constants;
 import com.davidremington.myrestaurants.models.Restaurant;
 
 import org.json.JSONArray;
@@ -17,8 +16,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 import timber.log.Timber;
 
 import static com.davidremington.myrestaurants.Constants.ADDRESS;
@@ -35,6 +32,7 @@ import static com.davidremington.myrestaurants.Constants.RATING;
 import static com.davidremington.myrestaurants.Constants.WEBSITE_URL;
 import static com.davidremington.myrestaurants.Constants.YELP_BASE_URL;
 import static com.davidremington.myrestaurants.Constants.YELP_LOCATION_QUERY_PARAMETER;
+import static com.davidremington.myrestaurants.Constants.YELP_TOKEN;
 
 /* OkHttp always returns a possible NullPointer in lint outside of the
  * anonymous onResponse method. It is guaranteed safe however.
@@ -44,16 +42,8 @@ import static com.davidremington.myrestaurants.Constants.YELP_LOCATION_QUERY_PAR
 @SuppressWarnings("ConstantConditions")
 public class YelpService {
 
-    public static void findRestaurants(String location, Callback callback) {
-        String CONSUMER_KEY = Constants.YELP_CONSUMER_KEY;
-        String CONSUMER_SECRET = Constants.YELP_CONSUMER_SECRET;
-        String TOKEN = Constants.YELP_TOKEN;
-        String TOKEN_SECRET = Constants.YELP_TOKEN_SECRET;
-        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
-        consumer.setTokenWithSecret(TOKEN, TOKEN_SECRET);
-
+    public static void findRestaurants(String location, Callback callback) {;
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new SigningInterceptor(consumer))
                 .build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(YELP_BASE_URL).newBuilder();
@@ -62,6 +52,7 @@ public class YelpService {
 
         Request request= new Request.Builder()
                 .url(url)
+                .header("Authorization", YELP_TOKEN)
                 .build();
         Call call = client.newCall(request);
         call.enqueue(callback);
