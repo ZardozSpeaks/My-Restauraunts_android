@@ -7,59 +7,71 @@
     android:background="@color/colorPrimary">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView"
-        android:src="@drawable/background2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:scaleType="centerCrop" />
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background2"
+        android:contentDescription="@string/main_background_description"/>
+
     <TextView
+        android:id="@+id/myRestaurantsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Restaurants"
-        android:id="@+id/myRestaurantsTextView"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorIcons"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp" />
+        android:layout_marginTop="50dp"
+        android:text="@string/app_title"
+        android:textColor="@color/colorIcons"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/locationEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/locationEditText"
-        android:background="@color/colorIcons"
-        android:padding="5dp"
-        android:hint="Enter Zip Code"
-        android:layout_above="@+id/saveRestaurantButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="133dp" />
+        android:layout_centerVertical="true"
+        android:background="@color/colorIcons"
+        android:ems="10"
+        android:hint="@string/location_edit_txt_hint"
+        android:inputType="phone"
+        android:padding="5dp" />
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find Restaurants"
-        android:id="@+id/findRestaurantsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorIcons" />
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2"
+        style="?android:attr/buttonBarStyle">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Saved Restaurants"
-        android:id="@+id/savedRestaurantsButton"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorIcons"
-        android:layout_above="@+id/findRestaurantsButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />/>
+        <Button
+            android:id="@+id/findRestaurantsButton"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/find_restaurants_btn_txt"
+            android:textSize="16sp"
+            android:textColor="@color/colorIcons"
+            android:layout_marginStart="16dp"/>
 
-
+        <Button
+            android:id="@+id/savedRestaurantsButton"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/saved_restaurants_btn_txt"
+            android:textSize="16sp"
+            android:textColor="@color/colorIcons"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
 </RelativeLayout>

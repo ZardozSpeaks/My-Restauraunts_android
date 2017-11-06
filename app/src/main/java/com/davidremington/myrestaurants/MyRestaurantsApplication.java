@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 
 public class MyRestaurantsApplication extends Application {
 
@@ -15,6 +16,9 @@ public class MyRestaurantsApplication extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             }
 
             @Override
