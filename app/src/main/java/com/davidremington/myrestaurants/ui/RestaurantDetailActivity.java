@@ -3,7 +3,6 @@ package com.davidremington.myrestaurants.ui;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.davidremington.myrestaurants.R;
 import com.davidremington.myrestaurants.adapters.RestaurantPagerAdapter;
@@ -13,24 +12,26 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RestaurantDetailActivity extends AppCompatActivity {
-    @Bind(R.id.viewPager)
-    ViewPager mViewPager;
-    private RestaurantPagerAdapter adapterViewPager;
-    ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+import static com.davidremington.myrestaurants.Constants.POSITION;
+import static com.davidremington.myrestaurants.Constants.RESTAURANTS;
+
+public class RestaurantDetailActivity extends BaseActivity {
+    ArrayList<Restaurant> restaurants = new ArrayList<>();
+
+    @BindView(R.id.viewPager) ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
         ButterKnife.bind(this);
-        mRestaurants = Parcels.unwrap(getIntent().getParcelableExtra("restaurants"));
-        int startingPosition = Integer.parseInt(getIntent().getStringExtra("position"));
-        adapterViewPager = new RestaurantPagerAdapter(getSupportFragmentManager(), mRestaurants);
-        mViewPager.setAdapter(adapterViewPager);
-        mViewPager.setCurrentItem(startingPosition);
+        restaurants = Parcels.unwrap(getIntent().getParcelableExtra(RESTAURANTS));
+        int startingPosition = Integer.parseInt(getIntent().getStringExtra(POSITION));
+        RestaurantPagerAdapter adapterViewPager = new RestaurantPagerAdapter(getSupportFragmentManager(), restaurants);
+        viewPager.setAdapter(adapterViewPager);
+        viewPager.setCurrentItem(startingPosition);
     }
 }

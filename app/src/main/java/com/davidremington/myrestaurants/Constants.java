@@ -18,6 +18,7 @@ public class Constants {
     //Intent constants
     public static final String POSITION = "position";
     public static final String RESTAURANTS = "restaurants";
+    public static final String RESTAURANT = "restaurant";
 
     //JSON constant
     public static final String BUSINESSES = "businesses";

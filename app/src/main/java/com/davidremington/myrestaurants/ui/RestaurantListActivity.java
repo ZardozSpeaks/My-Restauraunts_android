@@ -1,9 +1,8 @@
 package com.davidremington.myrestaurants.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -15,66 +14,49 @@ import com.davidremington.myrestaurants.services.YelpService;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 import okhttp3.Callback;
+import timber.log.Timber;
 
-public class RestaurantListActivity extends AppCompatActivity {
+import static com.davidremington.myrestaurants.Constants.LOCATION;
 
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+public class RestaurantListActivity extends BaseActivity {
+    private RestaurantListAdapter adapter;
+    public ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-    @Bind(R.id.restaurantsRecyclerView)
-    RecyclerView mRecyclerView;
-    private RestaurantListAdapter mAdapter;
-    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
-    public static final String TAG = RestaurantListActivity.class.getSimpleName();
-
+    @BindView(R.id.restaurantsRecyclerView) RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_list);
         ButterKnife.bind(this);
-
         Intent intent = getIntent();
-
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-//
-//        if (mRecentAddress != null) {
-//            getRestaurants(mRecentAddress);
-//        }
-
-        String location = intent.getStringExtra("location");
+        String location = intent.getStringExtra(LOCATION);
         getRestaurants(location);
     }
 
     private void getRestaurants(String location) {
-        final YelpService yelpService = new YelpService();
-
-        yelpService.findRestaurants(location, new Callback() {
+        YelpService.findRestaurants(location, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Timber.e(e.getMessage());
             }
 
             @Override
-            public void onResponse(Call call, Response response) {
-                mRestaurants = yelpService.processResults(response);
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                restaurants = YelpService.processResults(response);
 
-                RestaurantListActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(RestaurantListActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-                    }
+                RestaurantListActivity.this.runOnUiThread(() -> {
+                    adapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
+                    recyclerView.setAdapter(adapter);
+                    RecyclerView.LayoutManager layoutManager =
+                            new LinearLayoutManager(RestaurantListActivity.this);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setHasFixedSize(true);
                 });
             }
         });
